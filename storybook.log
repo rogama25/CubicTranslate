@@ -1,0 +1,23 @@
+Progress: resolved 0, reused 1, downloaded 0, added 0
+Progress: resolved 24, reused 24, downloaded 0, added 0
+Progress: resolved 201, reused 196, downloaded 0, added 0
+Progress: resolved 789, reused 787, downloaded 0, added 0
+Progress: resolved 851, reused 844, downloaded 0, added 0
+Progress: resolved 922, reused 915, downloaded 0, added 0
+Progress: resolved 995, reused 988, downloaded 0, added 0
+Progress: resolved 1106, reused 1097, downloaded 0, added 0
+Progress: resolved 1204, reused 1167, downloaded 0, added 0
+Progress: resolved 1240, reused 1203, downloaded 0, added 0
+Progress: resolved 1378, reused 1340, downloaded 0, added 0
+Progress: resolved 1446, reused 1409, downloaded 0, added 0
+Progress: resolved 1518, reused 1481, downloaded 0, added 0
+ WARN  2 deprecated subdependencies found: abab@2.0.6, domexception@4.0.0
+Packages: +774 -1
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+Progress: resolved 1532, reused 1495, downloaded 0, added 0, done
+.../sharp@0.32.6/node_modules/sharp install$ (node install/libvips && node install/dll-copy && prebuild-install) || (node install/can-compile && node-gyp rebuild && node install/dll-copy)
+.../sharp@0.32.6/node_modules/sharp install: sharp: Downloading https://github.com/lovell/sharp-libvips/releases/download/v8.14.5/libvips-8.14.5-linux-x64.tar.br
+.../sharp@0.32.6/node_modules/sharp install: sharp: Installation error: Request timed out
+.../sharp@0.32.6/node_modules/sharp install: sharp: Please see https://sharp.pixelplumbing.com/install for required dependencies
+.../sharp@0.32.6/node_modules/sharp install: Failed
+ ELIFECYCLE  Command failed with exit code 1.

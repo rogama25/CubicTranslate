@@ -1,5 +1,11 @@
 module.exports = {
-  "extends": "next/core-web-vitals",
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:storybook/recommended",
+    "plugin:storybook/recommended",
+    "plugin:storybook/recommended",
+    "plugin:storybook/recommended"
+  ],
   "rules": {
     "semi": ["warn", "always"],
     "quotes": ["warn", "double"],

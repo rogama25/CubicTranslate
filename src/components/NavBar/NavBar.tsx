@@ -1,7 +1,11 @@
 import {ReactNode} from "react";
 import {Flex} from "@chakra-ui/react";
 
-export default function NavBar({children}: { children: ReactNode }) {
+export type NavBarProps = {
+  children: ReactNode;
+};
+
+export function NavBar({children}: NavBarProps) {
   return (
     <Flex as="nav"
           align="center"
@@ -13,5 +17,5 @@ export default function NavBar({children}: { children: ReactNode }) {
           py={2}>
       {children}
     </Flex>
-  )
+  );
 }
