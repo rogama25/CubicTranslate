@@ -1,6 +1,10 @@
 on:
-  - push
-  - pull_request
+  push:
+    branches-ignore:
+      - master
+  pull_request:
+    branches:
+      - "*"
 
 jobs:
   lint:
@@ -39,7 +43,7 @@ jobs:
         with:
           run_install: true
 
-      - run: pnpm test --passWithNoTests
+      - run: pnpm run test --passWithNoTests
 
   build:
     runs-on: ubuntu-latest
