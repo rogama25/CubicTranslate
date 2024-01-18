@@ -1,14 +1,18 @@
 "use client";
 
 import {NavBar} from "@/components/NavBar/NavBar";
-import {Box, Flex, HStack, Icon, Image, Textarea, VStack, Text} from "@chakra-ui/react";
+import {Flex, HStack, Icon, Image} from "@chakra-ui/react";
 import {FaFileDownload, FaFileUpload} from "react-icons/fa";
-import {Table} from "@/components/Table/Table";
-import {TranslationContextProvider} from "@/components/TranslationsContextProvider/TranslationContextProvider";
+import {
+  TranslationContextProvider,
+  useTranslationContext
+} from "@/components/TranslationsContextProvider/TranslationContextProvider";
 import "@/styles/css-variables.css";
-import {Panel, PanelGroup, PanelResizeHandle} from "react-resizable-panels";
+import {TranslationUI} from "@/components/TranslationUI/TranslationUI";
+import {UploadDataTutorial} from "@/components/UploadDataTutorial/UploadDataTutorial";
 
 export default function Home() {
+  const translations = useTranslationContext();
   return (
     <TranslationContextProvider>
       <Flex h="100vh" w="100vw" flexDirection="column">
@@ -19,26 +23,9 @@ export default function Home() {
             <Icon as={FaFileUpload} h="100%" mx={4} w={6}/>
           </HStack>
         </NavBar>
-        <PanelGroup direction="vertical" style={{flex: 1}}>
-          <Panel>
-            <Table/>
-          </Panel>
-          <PanelResizeHandle>
-            <Box w="100%" h={2} bg="var(--chakra-colors-gray-200)"/>
-          </PanelResizeHandle>
-          <Panel>
-            <HStack w="100%" h="100%" align="stretch" p={4}>
-              <VStack w="100%" h="100%">
-                <Text>Original</Text>
-                <Textarea resize="none" w="100%" h="100%" disabled/>
-              </VStack>
-              <VStack  w="100%" h="100%">
-                <Text>Translation</Text>
-                <Textarea resize="none" w="100%" h="100%"/>
-              </VStack>
-            </HStack>
-          </Panel>
-        </PanelGroup>
+        {
+          translations.loaded ? <TranslationUI/> : <UploadDataTutorial/>
+        }
       </Flex>
     </TranslationContextProvider>
   );
