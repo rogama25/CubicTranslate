@@ -20,7 +20,9 @@ export function TranslationUI() {
   return (
     <PanelGroup direction="vertical" style={{ flex: 1 }}>
       <Panel>
-        <Table />
+        <Box w="100%" h="100%" overflowY={"scroll"}>
+          <Table />
+        </Box>
       </Panel>
       <PanelResizeHandle>
         <Box w="100%" h={2} bg="var(--chakra-colors-gray-200)" />

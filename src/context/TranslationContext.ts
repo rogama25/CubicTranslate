@@ -6,7 +6,7 @@ export interface TranslationContextData {
 }
 
 export type TranslationContextAction = {
-  type: "update-translation" | "update-original" | "select-row",
+  type: "update-translation" | "update-original" | "select-row" | "replace-translation" | "replace-original" | "loaded",
   payload: any
 }
 
@@ -34,6 +34,21 @@ export function translationContextReducer(state: TranslationContextData, action:
       return {
         ...state,
         selectedRow: action.payload
+      };
+    case "replace-translation":
+      return {
+        ...state,
+        translation: action.payload
+      };
+    case "replace-original":
+      return {
+        ...state,
+        original: action.payload
+      };
+    case "loaded":
+      return {
+        ...state,
+        loaded: true
       };
     default:
       return state;

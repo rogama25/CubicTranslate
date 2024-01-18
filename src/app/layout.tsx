@@ -1,7 +1,10 @@
 import type {Metadata} from "next";
 import {Providers} from "./providers";
 import React from "react";
-
+import Home from "./page";
+import "@/styles/css-variables.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "MCTranslator",
@@ -13,7 +16,8 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
     <html lang="en">
     <body>
     <Providers>
-      {children}
+      <Home/>
+      <ToastContainer/>
     </Providers>
     </body>
     </html>
