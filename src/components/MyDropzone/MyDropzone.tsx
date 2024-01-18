@@ -1,13 +1,14 @@
 import { ReactNode } from "react";
-import Dropzone from "react-dropzone";
+import Dropzone, { Accept } from "react-dropzone";
 
 export type MyDropzoneProps = {
   children: ReactNode[],
-  onDrop: (files: File[]) => void
+  onDrop: (files: File[]) => void,
+  accept: Accept
 }
 
-export function MyDropzone({children, onDrop}: MyDropzoneProps) {
-  return <Dropzone onDrop={onDrop}>
+export function MyDropzone({children, onDrop, accept}: MyDropzoneProps) {
+  return <Dropzone onDrop={onDrop} accept={accept}>
     {({ getRootProps, getInputProps, isDragActive }) => (
       <section>
         <div {...getRootProps()}>
