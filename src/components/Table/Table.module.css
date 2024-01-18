@@ -1,0 +1,4 @@
+.tableCell:not(:last-child) {
+    border-right: var(--chakra-borders-1px);
+    border-color: var(--chakra-colors-gray-100);
+}

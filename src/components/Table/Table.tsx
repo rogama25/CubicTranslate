@@ -1,22 +1,15 @@
 import {TranslationContextData} from "@/context/TranslationContext";
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel, getSortedRowModel,
-  SortingState,
-  useReactTable
-} from "@tanstack/react-table";
-import {useTranslationContext} from "@/components/TranslationsContextProvider/TranslationContextProvider";
-import {useRef, useState} from "react";
-import {chakra, Tbody, Th, Thead, Tr, Table as ChakraTable, Td, Flex} from "@chakra-ui/react";
-import {FaSort, FaSortDown, FaSortUp} from "react-icons/fa";
+import {createColumnHelper} from "@tanstack/react-table";
+import {useTranslationContext, useTranslationContextReducer} from "@/components/TranslationsContextProvider/TranslationContextProvider";
+import { TableLayout } from "./TableLayout";
 
 export type TranslationTableData = {
   original: string;
   translation: string;
+  key: string;
 }
 
-export const Table = () => {
+export function Table() {
 
   const columnHelper = createColumnHelper<TranslationTableData>();
 
@@ -30,85 +23,26 @@ export const Table = () => {
   ];
 
   const translations = useTranslationContext();
+  const translationDispatch = useTranslationContextReducer();
 
-  function getTableData(data: TranslationContextData) {
+  function getTableData(data: TranslationContextData | null) {
     if (!data?.loaded) {
       return [];
     }
     return Object.keys(data.translation).map(key => {
       return {
+        key: key,
         original: data.original[key],
         translation: data.translation[key]
       };
     });
   }
 
-  const [sorting, setSorting] = useState<SortingState>([]);
-
-  const calculatedData = useRef(getTableData(translations)).current;
-
-  const table = useReactTable({
-    columns,
-    data: calculatedData,
-    getCoreRowModel: getCoreRowModel(),
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    state: {
-      sorting
-    }
-  });
+  function onRowClick(rowKey: string) {
+    translationDispatch?.({ type: "select-row", payload: rowKey });
+  }
 
   return (
-    <ChakraTable p={4}>
-      <Thead>
-        {table.getHeaderGroups().map((headerGroup) => (
-          <Tr key={headerGroup.id}>
-            {headerGroup.headers.map((header) => {
-              // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
-              const meta: any = header.column.columnDef.meta;
-              return (
-                <Th
-                  key={header.id}
-                  onClick={header.column.getToggleSortingHandler()}
-                  isNumeric={meta?.isNumeric}
-                >
-                  <Flex>
-                    {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
-
-                    <chakra.span pl="4">
-                      {header.column.getIsSorted() ? (
-                        header.column.getIsSorted() === "desc" ? (
-                          <FaSortDown aria-label="sorted descending"/>
-                        ) : (
-                          <FaSortUp aria-label="sorted ascending"/>
-                        )
-                      ) : <FaSort/>}
-                    </chakra.span>
-                  </Flex>
-                </Th>
-              );
-            })}
-          </Tr>
-        ))}
-      </Thead>
-      <Tbody>
-        {table.getRowModel().rows.map((row) => (
-          <Tr key={row.id}>
-            {row.getVisibleCells().map((cell) => {
-              // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
-              const meta: any = cell.column.columnDef.meta;
-              return (
-                <Td key={cell.id} isNumeric={meta?.isNumeric}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </Td>
-              );
-            })}
-          </Tr>
-        ))}
-      </Tbody>
-    </ChakraTable>
+    <TableLayout columns={columns} data={getTableData(translations)} selectedRow={translations?.selectedRow} onRowClick={onRowClick} />
   );
-};
+}

@@ -1,10 +1,13 @@
 "use client";
 
-import {ChakraProvider} from "@chakra-ui/react";
+import { TranslationContextProvider } from "@/components/TranslationsContextProvider/TranslationContextProvider";
+import { ChakraProvider } from "@chakra-ui/react";
 import React from "react";
 
-export function Providers({children}: { children: React.ReactNode }) {
+export function Providers({ children }: { children: React.ReactNode }) {
   return <ChakraProvider>
-    {children}
+    <TranslationContextProvider>
+      {children}
+    </TranslationContextProvider>
   </ChakraProvider>;
 }

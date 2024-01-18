@@ -9,9 +9,7 @@ export type TranslationsContextProviderProps = {
   children: ReactNode;
 };
 
-export const TranslationContext = createContext<TranslationContextData>({
-  loaded: false, translation: {}, original: {}
-});
+export const TranslationContext = createContext<TranslationContextData | null>(null);
 
 export const TranslationContextReducerProvider = createContext<TranslationContextDispatch | null>(null);
 
