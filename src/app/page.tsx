@@ -1,14 +1,15 @@
 "use client";
 
 import { NavBar } from "@/components/NavBar/NavBar";
-import { Box, Flex, HStack, Icon, Image, Input, Link, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { FaFileDownload, FaFileUpload } from "react-icons/fa";
+import { Box, Flex, HStack, Icon, IconButton, Image, Input, Link, Menu, MenuButton, MenuItem, MenuList, useDisclosure } from "@chakra-ui/react";
+import { FaFileDownload, FaFileUpload, FaInfoCircle } from "react-icons/fa";
 import { useTranslationContext, useTranslationContextReducer } from "@/components/TranslationsContextProvider/TranslationContextProvider";
 import { TranslationUI } from "@/components/TranslationUI/TranslationUI";
 import { UploadDataTutorial } from "@/components/UploadDataTutorial/UploadDataTutorial";
 import { DestinationFileIcon, OriginalFileIcon } from "@/components/Icons/Icons";
 import { useRef } from "react";
 import { loadFile } from "@/utils/FileLoader";
+import { AboutModal } from "@/components/AboutModal/AboutModal";
 
 export default function Home() {
   const translations = useTranslationContext();
@@ -16,6 +17,7 @@ export default function Home() {
   const inputDestination = useRef<HTMLInputElement>(null);
   const download = useRef<HTMLAnchorElement>(null);
   const dispatch = useTranslationContextReducer();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   function handleInput(event: React.ChangeEvent<HTMLInputElement>, id: string) {
     if (event.target.files === null) return;
@@ -56,11 +58,16 @@ export default function Home() {
         break;
     }
   }
+
+  function handleAbout() {
+    onOpen();
+  }
   return (
     <Flex h="100vh" w="100vw" flexDirection="column">
       <NavBar>
         <Image src="/MCTranslator.png" alt="MCTranslator logo" h="100%" />
         <HStack h="100%" align="stretch">
+          <Icon as={FaInfoCircle} onClick={handleAbout} h="100%" mx={4} w={6} />
           <Menu strategy="fixed">
             <MenuButton as={Box} h="100%">
               <Icon as={FaFileDownload} h="100%" mx={4} w={6} />
@@ -95,6 +102,7 @@ export default function Home() {
       {
         translations?.loaded ? <TranslationUI /> : <UploadDataTutorial />
       }
+      <AboutModal isOpen={isOpen} onClose={onClose}/>
     </Flex>
   );
 }
