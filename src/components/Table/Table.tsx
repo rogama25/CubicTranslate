@@ -29,7 +29,7 @@ export function Table() {
     if (!data?.loaded) {
       return [];
     }
-    return Object.keys(data.translation).map(key => {
+    return Object.keys(data.original).map(key => {
       return {
         key: key,
         original: data.original[key],

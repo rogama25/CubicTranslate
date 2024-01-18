@@ -66,7 +66,8 @@ export function TableLayout({ columns, data, selectedRow, onRowClick }: TableLay
     <Tbody>
       {table.getRowModel().rows.map((row) => (
         <Tr key={row.id} onClick={() => onRowClick(row.original.key)}
-          bgColor={row.original.key === selectedRow ? "orange.200" : undefined}>
+          bgColor={row.original.key === selectedRow ? "orange.200" : undefined}
+          title={row.original.key}>
           {row.getVisibleCells().map((cell) => {
             // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
             const meta: any = cell.column.columnDef.meta;

@@ -8,6 +8,6 @@ export async function loadFile(file: File) {
       const binaryStr = reader.result;
       resolve(binaryStr as string);
     };
-    reader.readAsText(file);
+    reader.readAsText(file, "UTF-8");
   });
 }
