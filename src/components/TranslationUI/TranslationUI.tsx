@@ -20,7 +20,7 @@ export function TranslationUI() {
   return (
     <PanelGroup direction="vertical" style={{ flex: 1 }}>
       <Panel>
-        <Box w="100%" h="100%" overflowY={"scroll"}>
+        <Box w="100%" h="100%" overflowY="scroll">
           <Table />
         </Box>
       </Panel>
@@ -31,11 +31,11 @@ export function TranslationUI() {
         <HStack w="100%" h="100%" align="stretch" p={4}>
           <VStack w="100%" h="100%">
             <Text>Original</Text>
-            <Textarea resize="none" w="100%" h="100%" disabled value={translations?.original[translations.selectedRow as string]}/>
+            <Textarea resize="none" w="100%" h="100%" disabled value={translations?.translations.get(translations.selectedRow || "")?.original || ""}/>
           </VStack>
           <VStack w="100%" h="100%">
             <Text>Translation</Text>
-            <Textarea resize="none" w="100%" h="100%" value={translations?.translation[translations.selectedRow as string]} onChange={handleChange}/>
+            <Textarea resize="none" w="100%" h="100%" value={translations?.translations.get(translations.selectedRow || "")?.translation || ""} onChange={handleChange}/>
           </VStack>
         </HStack>
       </Panel>

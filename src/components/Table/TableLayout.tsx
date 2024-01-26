@@ -1,9 +1,9 @@
 import { ColumnDef, SortingState, flexRender, getCoreRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
-import { TranslationTableData } from "./Table";
 import { Thead, Tr, Th, Flex, chakra, Tbody, Td, Table as ChakraTable } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaSortDown, FaSortUp, FaSort } from "react-icons/fa";
 import styles from "@/components/Table/Table.module.css";
+import { TranslationTableData } from "@/context/TranslationContext";
 
 export type TableLayoutProps = {
   columns: ColumnDef<TranslationTableData, string>[],

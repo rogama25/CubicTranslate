@@ -27,10 +27,10 @@ export default function Home() {
         const json = JSON.parse(data);
         switch (id) {
           case "original":
-            dispatch && dispatch({ type: "replace-original", payload: json });
+            dispatch && dispatch({ type: "load-original", payload: json });
             break;
           case "translation":
-            dispatch && dispatch({ type: "replace-translation", payload: json });
+            dispatch && dispatch({ type: "load-translation", payload: json });
             break;
         }
       });
@@ -41,7 +41,7 @@ export default function Home() {
     console.log(download.current);
     switch (id) {
       case "original":
-        const originalData = JSON.stringify(translations?.original, null, "\t");
+        const originalData = JSON.stringify(Object.fromEntries(Array.from(translations?.translations || []).map(v => [v[0], v[1].original])), null, "\t");
         const originalBlob = new Blob([originalData], { type: "application/json" });
         if (download.current === null) return;
         download.current.href = URL.createObjectURL(originalBlob);
@@ -49,7 +49,7 @@ export default function Home() {
         download.current.click();
         break;
       case "translation":
-        const translationData = JSON.stringify(translations?.translation, null, "\t");
+        const translationData = JSON.stringify(Object.fromEntries(Array.from(translations?.translations || []).map(v => [v[0], v[1].translation])), null, "\t");;
         const translationBlob = new Blob([translationData], { type: "application/json" });
         if (download.current === null) return;
         download.current.href = URL.createObjectURL(translationBlob);
@@ -90,11 +90,11 @@ export default function Home() {
               <MenuItem onClick={() => inputOriginal.current?.click()}>
                 <OriginalFileIcon boxSize={6} mx={4} />Original
               </MenuItem>
-              <Input type="file" accept="application/json" display={"none"} ref={inputOriginal} onChange={(e) => handleInput(e, "original")} />
+              <Input type="file" accept="application/json" display="none" ref={inputOriginal} onChange={(e) => handleInput(e, "original")} />
               <MenuItem onClick={() => inputDestination.current?.click()}>
                 <DestinationFileIcon boxSize={6} mx={4} />Destination
               </MenuItem>
-              <Input type="file" accept="application/json" display={"none"} ref={inputDestination} onChange={(e) => handleInput(e, "translation")} />
+              <Input type="file" accept="application/json" display="none" ref={inputDestination} onChange={(e) => handleInput(e, "translation")} />
             </MenuList>
           </Menu>
         </HStack>

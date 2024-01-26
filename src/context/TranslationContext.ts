@@ -1,36 +1,35 @@
 export interface TranslationContextData {
   loadedOriginal: boolean,
   loadedTranslation: boolean,
-  original: Record<string, string>,
-  translation: Record<string, string>,
+  translations: Map<String, TranslationTableData>
   selectedRow?: string
 }
 
 export type TranslationContextAction = {
-  type: "update-translation" | "update-original" | "select-row" | "replace-translation" | "replace-original" | "loaded",
+  type: "update-translation" | "update-original" | "select-row" | "load-translation" | "load-original" | "loaded",
   payload: any
 }
 
 export type TranslationContextDispatch = (action: TranslationContextAction) => void;
+
+export type TranslationTableData = {
+  original: string;
+  translation: string;
+  key: string;
+}
 
 export function translationContextReducer(state: TranslationContextData, action: TranslationContextAction): TranslationContextData {
   switch (action.type) {
     case "update-translation":
       return {
         ...state,
-        translation: {
-          ...state.translation,
-          [action.payload.key]: action.payload.value
-        },
+        translations: state.translations.set(action.payload.key, { key: action.payload.key, original: state.translations.get(action.payload.key)?.original || "", translation: action.payload.value }),
         loadedTranslation: true
       };
     case "update-original":
       return {
         ...state,
-        original: {
-          ...state.original,
-          [action.payload.key]: action.payload.value
-        },
+        translations: state.translations.set(action.payload.key, { key: action.payload.key, translation: state.translations.get(action.payload.key)?.translation || "", original: action.payload.value }),
         loadedOriginal: true
       };
     case "select-row":
@@ -38,16 +37,24 @@ export function translationContextReducer(state: TranslationContextData, action:
         ...state,
         selectedRow: action.payload
       };
-    case "replace-translation":
+    case "load-translation":
       return {
         ...state,
-        translation: action.payload,
+        translations: new Map(Object.keys(action.payload).map(key => [key, {
+          key: key,
+          original: state.translations?.get(key)?.original || "",
+          translation: action.payload[key]
+        }])),
         loadedTranslation: true
       };
-    case "replace-original":
+    case "load-original":
       return {
         ...state,
-        original: action.payload,
+        translations: new Map(Object.keys(action.payload).map(key => [key, {
+          key: key,
+          translation: state.translations?.get(key)?.translation || "",
+          original: action.payload[key]
+        }])),
         loadedOriginal: true
       };
     case "loaded":

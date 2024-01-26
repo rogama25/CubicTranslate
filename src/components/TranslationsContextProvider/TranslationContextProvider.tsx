@@ -14,7 +14,7 @@ export const TranslationContext = createContext<TranslationContextData | null>(n
 export const TranslationContextReducerProvider = createContext<TranslationContextDispatch | null>(null);
 
 export function TranslationContextProvider({children}: TranslationsContextProviderProps) {
-  const [translation, dispatch] = useReducer(translationContextReducer, {loaded: false, translation: {}, original: {}});
+  const [translation, dispatch] = useReducer(translationContextReducer, {loadedOriginal: false, loadedTranslation: false, translations: new Map()});
   return (
     <TranslationContext.Provider value={translation}>
       <TranslationContextReducerProvider.Provider value={dispatch}>

@@ -23,5 +23,5 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
         <Text>Made with 💜 from Spain</Text>
       </ModalFooter>
     </ModalContent>
-  </Modal>
+  </Modal>;
 }

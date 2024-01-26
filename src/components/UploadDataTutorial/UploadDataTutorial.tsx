@@ -18,16 +18,16 @@ export function UploadDataTutorial() {
         const json = JSON.parse(data);
         switch (id) {
           case "original":
-            dispatch && dispatch({ type: "replace-original", payload: json });
+            dispatch && dispatch({ type: "load-original", payload: json });
             break;
           case "translation":
-            dispatch && dispatch({ type: "replace-translation", payload: json });
+            dispatch && dispatch({ type: "load-translation", payload: json });
             break;
         }
       });
     });
     if (rejectedFiles.length) {
-      toast("Error loading your file", {type: "error"})
+      toast("Error loading your file", {type: "error"});
     }
   }
   function handleNext() {

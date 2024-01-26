@@ -1,13 +1,9 @@
-import {TranslationContextData} from "@/context/TranslationContext";
+import {TranslationContextData, TranslationTableData} from "@/context/TranslationContext";
 import {createColumnHelper} from "@tanstack/react-table";
 import {useTranslationContext, useTranslationContextReducer} from "@/components/TranslationsContextProvider/TranslationContextProvider";
 import { TableLayout } from "./TableLayout";
 
-export type TranslationTableData = {
-  original: string;
-  translation: string;
-  key: string;
-}
+
 
 export function Table() {
 
@@ -26,16 +22,7 @@ export function Table() {
   const translationDispatch = useTranslationContextReducer();
 
   function getTableData(data: TranslationContextData | null) {
-    if (!data?.loadedOriginal) {
-      return [];
-    }
-    return Object.keys(data.original).map(key => {
-      return {
-        key: key,
-        original: data.original[key],
-        translation: data.translation[key]
-      };
-    });
+    return Array.from(data?.translations.values() || []);
   }
 
   function onRowClick(rowKey: string) {
