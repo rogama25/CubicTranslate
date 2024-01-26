@@ -17,7 +17,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
     <body>
     <Providers>
       <Home/>
-      <ToastContainer/>
+      <ToastContainer position="bottom-left"/>
     </Providers>
     </body>
     </html>

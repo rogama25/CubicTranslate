@@ -1,5 +1,6 @@
 export interface TranslationContextData {
-  loaded: boolean,
+  loadedOriginal: boolean,
+  loadedTranslation: boolean,
   original: Record<string, string>,
   translation: Record<string, string>,
   selectedRow?: string
@@ -12,7 +13,7 @@ export type TranslationContextAction = {
 
 export type TranslationContextDispatch = (action: TranslationContextAction) => void;
 
-export function translationContextReducer(state: TranslationContextData, action: TranslationContextAction) {
+export function translationContextReducer(state: TranslationContextData, action: TranslationContextAction): TranslationContextData {
   switch (action.type) {
     case "update-translation":
       return {
@@ -20,7 +21,8 @@ export function translationContextReducer(state: TranslationContextData, action:
         translation: {
           ...state.translation,
           [action.payload.key]: action.payload.value
-        }
+        },
+        loadedTranslation: true
       };
     case "update-original":
       return {
@@ -28,7 +30,8 @@ export function translationContextReducer(state: TranslationContextData, action:
         original: {
           ...state.original,
           [action.payload.key]: action.payload.value
-        }
+        },
+        loadedOriginal: true
       };
     case "select-row":
       return {
@@ -38,17 +41,25 @@ export function translationContextReducer(state: TranslationContextData, action:
     case "replace-translation":
       return {
         ...state,
-        translation: action.payload
+        translation: action.payload,
+        loadedTranslation: true
       };
     case "replace-original":
       return {
         ...state,
-        original: action.payload
+        original: action.payload,
+        loadedOriginal: true
       };
     case "loaded":
+      if (action.payload === "original") {
+        return {
+          ...state,
+          loadedOriginal: true
+        };
+      }
       return {
         ...state,
-        loaded: true
+        loadedTranslation: true
       };
     default:
       return state;

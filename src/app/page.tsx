@@ -63,14 +63,14 @@ export default function Home() {
     onOpen();
   }
   return (
-    <Flex h="100vh" w="100vw" flexDirection="column">
+    <Flex h="100svh" w="100svw" flexDirection="column">
       <NavBar>
         <Image src="/MCTranslator.png" alt="MCTranslator logo" h="100%" />
         <HStack h="100%" align="stretch">
-          <Icon as={FaInfoCircle} onClick={handleAbout} h="100%" mx={4} w={6} />
+          <Icon as={FaInfoCircle} onClick={handleAbout} h="100%" mx={[2,4]} w={[4,6]} />
           <Menu strategy="fixed">
             <MenuButton as={Box} h="100%">
-              <Icon as={FaFileDownload} h="100%" mx={4} w={6} />
+              <Icon as={FaFileDownload} h="100%" mx={[2,4]} w={[4,6]} />
             </MenuButton>
             <MenuList>
               <MenuItem onClick={() => handleDownload("original")}>
@@ -84,7 +84,7 @@ export default function Home() {
           </Menu>
           <Menu strategy="fixed">
             <MenuButton as={Box} h="100%">
-              <Icon as={FaFileUpload} h="100%" mx={4} w={6} />
+              <Icon as={FaFileUpload} h="100%" mx={[2,4]} w={[4,6]} />
             </MenuButton>
             <MenuList>
               <MenuItem onClick={() => inputOriginal.current?.click()}>
@@ -100,7 +100,7 @@ export default function Home() {
         </HStack>
       </NavBar>
       {
-        translations?.loaded ? <TranslationUI /> : <UploadDataTutorial />
+        translations?.loadedTranslation && translations?.loadedOriginal ? <TranslationUI /> : <UploadDataTutorial />
       }
       <AboutModal isOpen={isOpen} onClose={onClose}/>
     </Flex>

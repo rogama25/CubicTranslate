@@ -12,7 +12,7 @@ export function NavBar({children}: NavBarProps) {
           justify="space-between"
           wrap="wrap"
           w="100%"
-          h={20}
+          h={[12,20]}
           px={8}
           py={2}
           bgColor="gray.200"

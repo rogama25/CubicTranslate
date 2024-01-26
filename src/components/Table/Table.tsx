@@ -26,7 +26,7 @@ export function Table() {
   const translationDispatch = useTranslationContextReducer();
 
   function getTableData(data: TranslationContextData | null) {
-    if (!data?.loaded) {
+    if (!data?.loadedOriginal) {
       return [];
     }
     return Object.keys(data.original).map(key => {
