@@ -20,7 +20,7 @@ export function TranslationUI() {
   return (
     <PanelGroup direction="vertical" style={{ flex: 1 }}>
       <Panel>
-        <Box w="100%" h="100%" overflowY="scroll">
+        <Box w="100%" h="100%">
           <Table />
         </Box>
       </Panel>
