@@ -35,7 +35,7 @@ export function UploadDataTutorial() {
   }
   return (
     <VStack flex="1" m={4}>
-      <Heading as="h1" size="2xl">Upload your data</Heading>
+      <Heading as="h1" size="2xl">Upload your files</Heading>
       <Grid w="100%" h="100%" gridTemplateColumns="repeat(auto-fit, minmax(350px, 1fr))">
         <Flex direction="column" justify="stretch" maxH="100%" maxW="100%" m={[2, 20]}>
           <Card h="100%" w="100%">

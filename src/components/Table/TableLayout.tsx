@@ -37,8 +37,7 @@ export function TableLayout({ columns, data, selectedRow, onRowClick }: TableLay
     estimateSize: () => 50,
     getScrollElement: () => tableRef.current,
     measureElement:
-      typeof window !== "undefined" &&
-        navigator.userAgent.indexOf("Firefox") === -1
+      typeof window !== "undefined"
         ? element => element?.getBoundingClientRect().height
         : undefined,
     overscan: 20
@@ -46,7 +45,7 @@ export function TableLayout({ columns, data, selectedRow, onRowClick }: TableLay
 
 
   return <Box ref={tableRef} overflow="auto" height="100%">
-    <ChakraTable p={4} layout="fixed" overflowY="hidden">
+    <ChakraTable p={4} layout="fixed">
     <Thead>
       {table.getHeaderGroups().map((headerGroup) => (
         <Tr key={headerGroup.id}>
