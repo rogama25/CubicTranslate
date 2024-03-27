@@ -2,15 +2,15 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { Table } from "@/components/Table/Table";
 import { Box, HStack, Text, Textarea, VStack } from "@chakra-ui/react";
 import { useTranslationContext, useTranslationContextReducer } from "../TranslationsContextProvider/TranslationContextProvider";
-import {useRef} from "react";
 import {useSettingsContext} from "@/components/SettingsContextProvider/SettingsContextProvider";
+import {ChangeEvent} from "react";
 
 export function TranslationUI() {
   const translations = useTranslationContext();
   const translationDispatch = useTranslationContextReducer();
   const settings = useSettingsContext();
 
-  function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>, type: "update-original" | "update-translation") {
+  function handleChange(e: ChangeEvent<HTMLTextAreaElement>, type: "update-original" | "update-translation") {
     translationDispatch?.({
       type: type,
       payload: {

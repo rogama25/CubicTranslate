@@ -1,15 +1,13 @@
 import {
-  Box, Flex,
+  Flex,
   FormControl, FormLabel,
-  Link,
   Modal,
   ModalBody,
   ModalCloseButton,
-  ModalContent, ModalFooter,
-  ModalHeader,
+  ModalContent, ModalHeader,
   ModalOverlay,
   Stack, Switch,
-  Text, useColorMode
+  useColorMode
 } from "@chakra-ui/react";
 import {
   useSettingsContext,
@@ -25,7 +23,7 @@ export function SettingsModal({isOpen, onClose}: SettingsModalProps) {
   const settings = useSettingsContext();
   const reducer = useSettingsReducerProvider();
 
-  const {colorMode, toggleColorMode} = useColorMode()
+  const {colorMode, toggleColorMode} = useColorMode();
 
   function updateSetting(setting: string) {
     if (reducer) {

@@ -7,7 +7,7 @@ import { useTranslationContext, useTranslationContextReducer } from "@/component
 import { TranslationUI } from "@/components/TranslationUI/TranslationUI";
 import { UploadDataTutorial } from "@/components/UploadDataTutorial/UploadDataTutorial";
 import { DestinationFileIcon, OriginalFileIcon } from "@/components/Icons/Icons";
-import { useRef } from "react";
+import {ChangeEvent, useRef} from "react";
 import { loadFile } from "@/utils/FileLoader";
 import { AboutModal } from "@/components/AboutModal/AboutModal";
 import {SettingsModal} from "@/components/SettingsModal/SettingsModal";
@@ -22,7 +22,7 @@ export default function Home() {
   const { isOpen: isOpenTutorial, onOpen: onOpenTutorial, onClose: onCloseTutorial } = useDisclosure();
   const { isOpen: isOpenSettings, onOpen: onOpenSettings, onClose: onCloseSettings } = useDisclosure();
 
-  function handleInput(event: React.ChangeEvent<HTMLInputElement>, id: string) {
+  function handleInput(event: ChangeEvent<HTMLInputElement>, id: string) {
     if (event.target.files === null) return;
     Array.from(event.target.files).forEach((file) => {
       if (file.type !== "application/json") return;
@@ -52,7 +52,7 @@ export default function Home() {
         download.current.click();
         break;
       case "translation":
-        const translationData = JSON.stringify(Object.fromEntries(Array.from(translations?.translations || []).map(v => [v[0], v[1].translation])), null, "\t");;
+        const translationData = JSON.stringify(Object.fromEntries(Array.from(translations?.translations || []).map(v => [v[0], v[1].translation])), null, "\t");
         const translationBlob = new Blob([translationData], { type: "application/json" });
         if (download.current === null) return;
         download.current.href = URL.createObjectURL(translationBlob);
