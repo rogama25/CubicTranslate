@@ -35,6 +35,9 @@ dependencies:
   react:
     specifier: ^18
     version: 18.2.0
+  react-beforeunload:
+    specifier: ^2.6.0
+    version: 2.6.0(react@18.2.0)
   react-dom:
     specifier: ^18
     version: 18.2.0(react@18.2.0)
@@ -97,6 +100,9 @@ devDependencies:
   '@types/react':
     specifier: ^18
     version: 18.2.45
+  '@types/react-beforeunload':
+    specifier: ^2.1.5
+    version: 2.1.5
   '@types/react-dom':
     specifier: ^18
     version: 18.2.18
@@ -5390,6 +5396,12 @@ packages:
 
   /@types/range-parser@1.2.7:
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
+    dev: true
+
+  /@types/react-beforeunload@2.1.5:
+    resolution: {integrity: sha512-xrczkBsJ26lidA/Y/Oln0lYgux79KUkpomaOdnQFPRV9Sx1Mgx53RkYsgZ234HG1ZMKGCmzpk7jO5T4h3bmjvg==}
+    dependencies:
+      '@types/react': 18.2.45
     dev: true
 
   /@types/react-dom@18.2.18:
@@ -11334,6 +11346,14 @@ packages:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
     dev: true
+
+  /react-beforeunload@2.6.0(react@18.2.0):
+    resolution: {integrity: sha512-aKrGaRNc7fZQlDnmSYrXu4cbz9QEPhScA4A2mLxhjcULDy4VILLyLhSEjg2goIw3o5LQ1zss44kmQh5LXWYGCw==}
+    peerDependencies:
+      react: ^16.8.0 || 17 || 18
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /react-clientside-effect@1.2.6(react@18.2.0):
     resolution: {integrity: sha512-XGGGRQAKY+q25Lz9a/4EPqom7WRjz3z9R2k4jhVKA/puQFH/5Nt27vFZYql4m4NVNdUvX8PS3O7r/Zzm7cjUlg==}

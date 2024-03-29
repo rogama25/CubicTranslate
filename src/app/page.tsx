@@ -11,6 +11,7 @@ import {ChangeEvent, useRef} from "react";
 import { loadFile } from "@/utils/FileLoader";
 import { AboutModal } from "@/components/AboutModal/AboutModal";
 import {SettingsModal} from "@/components/SettingsModal/SettingsModal";
+import {useBeforeunload} from "react-beforeunload";
 
 export default function Home() {
   const translations = useTranslationContext();
@@ -76,6 +77,10 @@ export default function Home() {
   function handleSettings() {
     onOpenSettings();
   }
+
+  useBeforeunload(translations?.loadedTranslation && translations.loadedOriginal? (e) => {
+    e.preventDefault();
+  }: undefined);
 
   return (
     <Flex h="100svh" w="100svw" flexDirection="column">
