@@ -12,6 +12,7 @@ import { loadFile } from "@/utils/FileLoader";
 import { AboutModal } from "@/components/AboutModal/AboutModal";
 import {SettingsModal} from "@/components/SettingsModal/SettingsModal";
 import {useBeforeunload} from "react-beforeunload";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function Home() {
   const translations = useTranslationContext();
@@ -22,6 +23,7 @@ export default function Home() {
   const { isOpen: isOpenModal, onOpen: onOpenModal, onClose: onCloseModal } = useDisclosure();
   const { isOpen: isOpenTutorial, onOpen: onOpenTutorial, onClose: onCloseTutorial } = useDisclosure();
   const { isOpen: isOpenSettings, onOpen: onOpenSettings, onClose: onCloseSettings } = useDisclosure();
+  const [tutorialSeen, setTutorialSeen] = useLocalStorageState("tutorialSeen", {defaultValue: false});
 
   function handleInput(event: ChangeEvent<HTMLInputElement>, id: string) {
     if (event.target.files === null) return;
@@ -69,8 +71,9 @@ export default function Home() {
 
   const firstRender = useRef(true);
 
-  if (translations?.loadedTranslation && translations?.loadedOriginal && firstRender.current) {
+  if (!tutorialSeen && translations?.loadedTranslation && translations?.loadedOriginal && firstRender.current) {
     onOpenTutorial();
+    setTutorialSeen(true);
     firstRender.current = false;
   }
 
